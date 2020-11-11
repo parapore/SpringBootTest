@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.AccountMapper">
+
+	<!-- ユーザー情報のリザルトマップ -->
+	<resultMap id="AccountModel" type="com.example.demo.model.AccountModel">
+		<result property="accountId"  column="accountId" />
+		<result property="accountEmail"  column="accountEmail" />
+		<result property="accountPassword"  column="accountPassword" />
+		<result property="accountName"  column="accountName" />
+		<result property="accountRole"  column="accountRole" />
+	</resultMap>
+
+	<!-- アカウント情報を取得する -->
+	<select id="getAccount" resultMap="AccountModel">
+		SELECT
+			accountId
+			,accountEmail
+			,accountPassword
+			,accountName
+			,accountRole
+			,accountCreateTime
+			,accountUpdateTime
+		FROM
+			account
+		WHERE
+			accountEmail = #{accountEmail};
+	</select>
+
+	<!-- アカウント情報を登録する -->
+	<insert id="insertAccount">
+		INSERT INTO account (
+			accountEmail
+			,accountPassword
+			,accountName
+			,accountRole
+			,accountCreateTime
+			,accountUpdateTime
+		) VALUES (
+			#{accountEmail}
+			, #{accountPassword}
+			, #{accountName}
+			, #{accountRole}
+			, CURRENT_TIMESTAMP
+			, CURRENT_TIMESTAMP
+		)
+	</insert>
+
+	<!-- アカウントを更新する -->
+	<update id="updateAccount">
+		UPDATE
+			baitai
+		SET
+			baitai_name = #{baitai_name}
+			, update_date = CURRENT_TIMESTAMP
+			, update_user = 'test'
+		WHERE
+			baitai_cd = #{baitai_cd}
+	</update>
+
+	<!-- アカウントを削除する -->
+	<delete id="deleteAccount">
+		DELETE FROM
+			baitai
+		WHERE
+			baitai_cd = #{baitai_cd}
+	</delete>
+</mapper>

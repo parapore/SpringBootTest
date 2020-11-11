@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+
+
+<!-- Bootstrapの設定 -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+	crossorigin="anonymous"></script>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+<title>新規登録</title>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<div>
+				<span>Signup</span>
+
+			</div>
+		</header>
+		<form method="POST" th:action="@{/signup}" name="signupform">
+			<div class="form-group">
+				<label for="email">・メール</label> <input type="text"
+					class="form-control col-8"
+					th:classappend="${#fields.hasErrors('accountModel.accountEmail')} ? 'is-invalid'"
+					id="email" name="accountEmail" th:value="${accountEmail}"
+					aria-describedby="emailHelp" placeholder="Enter email"> <span
+					class="text-danger"
+					th:if="${#fields.hasErrors('accountModel.accountEmail')}"
+					th:errors="*{accountModel.accountEmail}"> email error </span>
+			</div>
+			<div class="form-group">
+				<label for="password">・パスワード</label> <input type="text"
+					class="form-control"
+					th:classappend="${#fields.hasErrors('accountModel.accountPassword')} ? 'is-invalid'"
+					id="password" name="accountPassword" th:value="${accountPassword}"
+					placeholder="Enter password"> <small id="passHelp"
+					class="form-text text-muted">半角英数字３～２５文字</small> <span
+					class="text-danger"
+					th:if="${#fields.hasErrors('accountModel.accountPassword')}"
+					th:errors="*{accountModel.accountPassword}"> password error
+				</span>
+			</div>
+			<div class="form-group">
+				<label for="name">・名前</label> <input class="form-control"
+					type="text"
+					th:classappend="${#fields.hasErrors('accountModel.accountPassword')} ? 'is-invalid'"
+					id="name" name="accountName" th:value="${accountName}"
+					placeholder="Enter name"> <small id="nameHelp"
+					class="form-text text-muted">３～１５文字</small> <span
+					class="text-danger"
+					th:if="${#fields.hasErrors('accountModel.accountName')}"
+					th:errors="*{accountModel.accountName}"> name error </span>
+			</div>
+			<div class="form-group">
+				<label>・権限</label>
+				<div class="form-check"
+					th:classappend="${#fields.hasErrors('accountModel.accountRole')} ? 'is-invalid'"
+					th:each="item:${radioAccountRoleModel}">
+					<input class="form-check-input" type="radio" name="accountRole"
+						th:text="${item.key}" th:value="${item.value}"> <span
+						class="text-danger"
+						th:if="${#fields.hasErrors('accountModel.accountRole')}"
+						th:errors="*{accountModel.accountRole}"> role error </span>
+				</div>
+			</div>
+			<div class="signup-button">
+				<button type="submit" class="btn btn-primary">送信</button>
+			</div>
+		</form>
+	</div>
+	<div>
+		<form class="move-login" th:action="@{/login}" method="get">
+			<button type="submit">ログイン画面へ</button>
+		</form>
+	</div>
+</body>
+</html>

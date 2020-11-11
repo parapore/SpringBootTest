@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+	<form method="post" th:action="@{/logout}">
+		<button type="submit">ログアウト</button>
+	</form>
+	<div>
+		<form method="get" th:action="@{/userpage}">
+			<button type="submit">ユーザーページへ</button>
+		</form>
+		<form method="get" th:action="@{/adminpage}" sec:authorize="hasRole('ADMIN')">
+			<button type="submit">消える管理者画面ボタン</button>
+		</form>
+	</div>
+</body>
+</html>

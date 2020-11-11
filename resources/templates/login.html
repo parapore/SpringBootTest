@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+
+<!-- Bootstrapの設定 -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+	crossorigin="anonymous"></script>
+
+<link rel="stylesheet" th:href="@{/css/style.css}">
+
+
+<title>ログイン</title>
+</head>
+<body class="text-center">
+
+	<h1>Login</h1>
+	<div class="container">
+		<form method="post" th:action="@{/login}" name="loginform">
+
+			<div class="form-group">
+				<input type="text" class="form-control"
+					th:classappend="${#fields.hasErrors('accountModel.accountEmail')} ? 'is-invalid'"
+					name="accountEmail" th:value="${accountEmail}"
+					placeholder="Enter Email"> <span class="text-danger"
+					th:if="${#fields.hasErrors('accountModel.accountEmail')}"
+					th:errors="*{accountModel.accountEmail}"> email error </span>
+			</div>
+
+
+
+			<div class="form-group">
+				<input type="text" class="form-control"
+					th:classappend="${#fields.hasErrors('accountModel.accountPassword')} ? 'is-invalid'"
+					name="accountPassword" th:value="${accountPassword}"
+					placeholder="Enter Password"> <span class="text-danger"
+					th:if="${#fields.hasErrors('accountModel.accountPassword')}"
+					th:errors="*{accountModel.accountPassword}"> password error
+				</span>
+			</div>
+			<input type="submit" class="btn btn-primary" value="Login">
+		</form>
+	</div>
+	<!-- エラーメッセージ -->
+	<p th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null"
+		th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"
+		class="text-danger">ログインエラーメッセージ</p>
+	<div>
+		<form method="get" th:action="@{/signup}">
+			<button type="submit">新規登録画面へ</button>
+		</form>
+	</div>
+
+</body>
+</html>

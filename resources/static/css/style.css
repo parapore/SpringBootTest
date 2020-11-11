@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+/*
+staticフォルダに配置しないと読み込まれない！
+さらに、パスしてをstatic以下から始めないとダメ！
+*/
+
+.container {
+  max-width: 400px;
+  border: solid 10px #3effff;
+  border-radius: 10px 10px 10px 10px;
+  padding: 0px;
+}
+
+header {
+  background:  #3effff;
+  font-size: 25px;
+  font-family: sans-serif;
+}
+
+form {
+	padding: 10px;
+}
+
+.has-error{
+	border: solid 1px #ff0000;
+}
+
+.signup-button {
+	text-align: right;
+}
+
+.move-login {
+	text-align: center;
+}
